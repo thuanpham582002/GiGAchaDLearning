@@ -49,19 +49,44 @@ Lúc này ta có bản local của repository. Mô hình giống trên ảnh.
     + Patching
 ### Getting and Creating Projects
 - `git init`: Khởi tạo một repo local
+```bash
+$ git init
+```
 - `git remote add origin <server>`: Thêm một remote repo
+```bash
+$ git remote add origin <server>
+```
 - `git clone <server>`: Clone một repo về máy
+```bash
+$ git clone <server>
+```
 
 ### Basic Snapshotting
 #### Các lệnh thưởng sử dụng
 - `git status`: Kiểm tra trạng thái của repo
 - `git add`: Thêm các tập tin vào staging area
 ```bash
-staging area: là khu vực chứa các tập tin sẽ được commit (ở đây là file index)
+$ git add <file>
+or
+$ git add .
+~ thêm tất cả các tập tin
 ```
+Ở đây sẽ đẻ ra các trạng thái của file:  (tùy từng trạng thái mà liên quan đến việc file này có được khôi phục lại hay không)
 
+    + Untracked: là các file chưa được add vào staging area
+    + Unmodified: là các file đã được add vào staging area, nhưng chưa được commit
+    + Modified: là các file đã được commit, nhưng chưa được push lên repo cloud
+    + Staged: là các file đã được commit, và đã được push lên repo cloud
 - `git commit`: Tạo một commit mới
+```bash
+$ git commit -m "message"
+~ m ở đây là message, là một thông điệp mô tả cho commit
+```
 - `git log`: Hiển thị các commit đã được thực hiện
+```bash
+$ git log
+```
+![git log](screenshots/git-log.png)
 
 Ngoài ra 
 - `git diff`: Hiển thị các thay đổi giữa các commit
