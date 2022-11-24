@@ -97,10 +97,23 @@ Ngoài ra
 
 ### Branching and Merging
 - `git branch`: Hiển thị các nhánh hiện có
+![git branch](screenshots/git-branch.png)
 - `git branch <branch-name>`: Tạo một nhánh mới
+```bash
+$ git branch <branch-name>
+```
 - `git checkout <branch-name>`: Chuyển sang nhánh mới
+```bash
+$ git checkout <branch-name>
+```
 - `git merge <branch-name>`: Merge nhánh mới vào nhánh hiện tại
+```bash
+$ git merge <branch-name>
+```
 - `git branch -d <branch-name>`: Xóa một nhánh
+```bash
+$ git branch -d <branch-name>
+```
 
 ### Sharing and Updating Projects
 - `git push`: Đẩy các commit lên repo cloud
