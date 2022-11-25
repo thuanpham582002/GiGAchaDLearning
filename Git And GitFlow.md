@@ -204,13 +204,11 @@ Cùng thử lệnh `git fetch` trên `local1` xem sao nhé!
 ![git fetch](screenshots/git-fetch-2.PNG)
 Lúc này thì `local1` đã được cập nhật lại từ repo cloud. Nhưng chưa được merge vào nhánh hiện tại và vẫn giữ nguyên ở commit hiện tại. Cùng check lại xem sao nhé!
 ![git fetch](screenshots/git-fetch-3.PNG)
-Tuy nhiên khi ta muốn tạo thêm một commit mới thì sẽ bị reject do commit mới nhất của `local1` chưa được merge vào nhánh hiện tại. Do vậy `git fetch` chỉ có tác dụng cập nhật thông tin, trạng thái repo. Để `local1` có thể tạo thêm commit mới thì ta phải merge nhánh mới vào nhánh hiện tại. Do vậy ta sẽ dùng lệnh `git pull` để cập nhật repo và merge nhánh mới vào nhánh hiện tại.
+Tuy nhiên khi ta muốn tạo thêm một commit mới thì sẽ đè lên commit mới nhất với dữ liệu cũ, lỗi này không được phép có trong project thực tế. Do vậy `git fetch` chỉ có tác dụng cập nhật thông tin, trạng thái repo.
 ![git fetch](screenshots/git-fetch-4.PNG)
 Sau khi dùng `git pull` thì `local1` đã được cập nhật và merge nhánh mới vào nhánh hiện tại. Ở đây bị conflict thì ta xử lí như tình huống giống trên merge. 
 ![git pull](screenshots/git-pull.PNG)
 `git pull` = `git fetch` + `git merge`
-
-
 
 ### Patching
 - `git stash`: Lưu các thay đổi hiện tại vào một khu vực tạm thời
@@ -236,10 +234,28 @@ $ git pull
 
 D: problem solved
 ```
-- `git rebase`: Rebase các commit trên một nhánh khác
-```bash
-$ git rebase <branch-name>
-```
+- `git rebase`: Dễ hiểu thì `git rebase` sửa đường nối của các commit.
+from:      A---B---C topic
+         /                 
+    D---E---A'---F master
+to:
+                   B'---C' topic
+                  /
+    D---E---A'---F master
+from:
+    o---o---o---o---o  master
+         \
+          o---o---o---o---o  next
+                           \
+                            o---o---o  topic
+to:
+    o---o---o---o---o  master
+        |            \
+        |             o'--o'--o'  topic
+         \
+          o---o---o---o---o  next
+Để hiểu rõ hơn thì các bạn có thể xem thêm tại [đây](https://git-scm.com/docs/git-rebase)
+
 - `git revert`: Revert một commit
 ```bash
 $ git revert <commit-id>
