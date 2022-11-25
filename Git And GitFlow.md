@@ -74,9 +74,20 @@ $ git add .
 Ở đây sẽ đẻ ra các trạng thái của file:  (tùy từng trạng thái mà liên quan đến việc file này có được khôi phục lại hay không)
 
     + Untracked: là các file chưa được add vào staging area
+
+![git untracked](screenshots/git-untracked.PNG)
+
     + Unmodified: là các file đã được add vào staging area, nhưng chưa được commit
+
+![git unmodified](screenshots/git-unmodified.PNG)
     + Modified: là các file đã được commit, nhưng chưa được push lên repo cloud
+
+![git modified](screenshots/git-modified.PNG)
+
     + Staged: là các file đã được commit, và đã được push lên repo cloud
+
+![git log](screenshots/git-stage.webp)
+
 - `git commit`: Tạo một commit mới
 ```bash
 $ git commit -m "message"
