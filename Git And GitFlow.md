@@ -86,7 +86,7 @@ $ git commit -m "message"
 ```bash
 $ git log
 ```
-![git log](screenshots/git-log.png)
+![git log](screenshots/git-log.PNG)
 
 Ngoài ra 
 - `git diff`: Hiển thị các thay đổi giữa các commit
@@ -97,7 +97,7 @@ Ngoài ra
 
 ### Branching and Merging
 - `git branch`: Hiển thị các nhánh hiện có
-![git branch](screenshots/git-branch.png)
+![git branch](screenshots/git-branch.PNG)
 - `git branch <branch-name>`: Tạo một nhánh mới
 ```bash
 $ git branch <branch-name>
@@ -134,5 +134,13 @@ $ git pull
 $ git stash pop
 
 D: problem solved
+```
+- `git rebase`: Rebase các commit trên một nhánh khác
+```bash
+$ git rebase <branch-name>
+```
+- `git revert`: Revert một commit
+```bash
+$ git revert <commit-id>
 ```
 # Git flow
