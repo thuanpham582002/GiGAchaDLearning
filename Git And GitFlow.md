@@ -122,16 +122,26 @@ $ git branch -d <branch-name>
 
 ### Patching
 - `git stash`: Lưu các thay đổi hiện tại vào một khu vực tạm thời
-- `git stash pop`: Lấy các thay đổi đã lưu trước đó
+- Trước khi gọi lệnh `git stash` thì các thay đổi sẽ được hiển thị như sau:
+![git stash](screenshots/git-stash.PNG)
+- Sau khi gọi lệnh `git stash` thì các thay đổi sẽ được hiển thị như sau:
+![git stash](screenshots/git-stash-2.PNG)
 ```bash
-Dùng git stash và stash pop khi git pull bị conflict.
+Lưu các thay đổi chưa được commit vào một khu vực tạm thời và xóa các thay đổi đó khỏi staging area
+```
+- `git stash pop`: Lấy các thay đổi đã lưu trước đó
+- Sau khi gọi lệnh `git stash pop` thì các thay đổi sẽ được hiển thị như sau:
+![git stash](screenshots/git-stash-3.PNG)
 
+```bash
+Lấy các thay đổi đã lưu trước đó và merge vào nhánh hiện tại
+
+Dùng git stash và stash pop khi git pull bị conflict.
 $ git pull
  ...
 file foobar not up to date, cannot merge.
-$ git stash
+
 $ git pull
-$ git stash pop
 
 D: problem solved
 ```
