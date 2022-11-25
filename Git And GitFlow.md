@@ -90,7 +90,6 @@ $ git log
 
 Ngoài ra 
 - `git diff`: Hiển thị các thay đổi giữa các commit
-- `git diff`: Hiển thị các thay đổi giữa các commit
 - `git reset`: Đưa các tập tin về trạng thái trước khi commit
 - `git rm`: Xóa các tập tin khỏi repo
 - `git mv`: Di chuyển các tập tin trong repo
@@ -105,6 +104,10 @@ $ git branch <branch-name>
 - `git checkout <branch-name>`: Chuyển sang nhánh mới
 ```bash
 $ git checkout <branch-name>
+```
+- `git checkout <file-name>`: Khôi phục lại file
+```bash
+$ git checkout <file-name>
 ```
 - `git merge <branch-name>`: Merge nhánh mới vào nhánh hiện tại
 ```bash
@@ -130,7 +133,6 @@ $ git branch -d <branch-name>
 Lưu các thay đổi chưa được commit vào một khu vực tạm thời và xóa các thay đổi đó khỏi staging area
 ```
 - `git stash pop`: Lấy các thay đổi đã lưu trước đó
-- Sau khi gọi lệnh `git stash pop` thì các thay đổi sẽ được hiển thị như sau:
 ![git stash](screenshots/git-stash-3.PNG)
 
 ```bash
