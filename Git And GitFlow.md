@@ -85,7 +85,19 @@ $ git add .
 ![git modified](screenshots/git-modified.PNG)
 
     + Staged: là các file đã được commit, và đã được push lên repo cloud
+    
+![git staged](screenshots/git-staged.PNG)
 
+```bash
+Một số kí hiệu trong visual studio code
+A - Added (This is a new file that has been added to the repository)
+M - Modified (An existing file has been changed)
+D - Deleted (a file has been deleted)
+U - Untracked (The file is new or has been changed but has not been added to the repository yet)
+C - Conflict (There is a conflict in the file)
+R - Renamed (The file has been renamed)
+S - Submodule (In repository exists another subrepository)
+```
 ![git log](screenshots/git-stage.webp)
 
 - `git commit`: Tạo một commit mới
@@ -93,6 +105,7 @@ $ git add .
 $ git commit -m "message"
 ~ m ở đây là message, là một thông điệp mô tả cho commit
 ```
+![git commit](screenshots/git-commit.PNG)
 - `git log`: Hiển thị các commit đã được thực hiện
 ```bash
 $ git log
@@ -106,16 +119,58 @@ Ngoài ra
 - `git mv`: Di chuyển các tập tin trong repo
 
 ### Branching and Merging
+Đây là nhánh cây đầu tiên của repo. Nó chỉ gồm 1 nhánh duy nhất là mặc định là main.
+![git log](screenshots/git-branch-1.PNG)
 - `git branch`: Hiển thị các nhánh hiện có
 ![git branch](screenshots/git-branch.PNG)
-- `git branch <branch-name>`: Tạo một nhánh mới
+- `git branch <branch-name>`: Tạo một nhánh mới ở local. Nhánh chỉ được tạo trên remote khi push lên repo cloud tại nhánh này.
 ```bash
 $ git branch <branch-name>
 ```
+![git branch](screenshots/git-branch-2.PNG)
+Như vậy ta đã tạo thành công một nhánh mới là `main_B`. Cùng check lại các nhánh hiện có bằng lệnh `git branch`
+![git branch](screenshots/git-branch-3.PNG)
+Dấu `*` ở trước tên nhánh là nhánh ta đang ở.
+Cùng check lại nhánh cây xem sao nhé!
+![git branch](screenshots/git-branch-1.PNG)
+Nhánh cây hiện tại vẫn như ban đầu, vì ta chưa push lên repo cloud.
+Đây là nhánh cây sau khi ta push lên repo cloud tại nhánh `main_B`
+![git branch](screenshots/git-branch-4.PNG)
+Dấu đỏ mình khoanh tròn là nhánh `main_B` đã được push lên repo cloud. Do mình push lên với cùng commit của main nên trông 2 nhánh giống như 1 vậy.
+
 - `git checkout <branch-name>`: Chuyển sang nhánh mới
 ```bash
 $ git checkout <branch-name>
 ```
+
+Tiếp đó mình sẽ thử thay đổi một số file để tạo ra commit mới. Sau đó push lên repo cloud tại nhánh `main_B`. Cùng check lại nhánh cây xem sao nhé!
+![git branch](screenshots/git-branch-5.PNG)
+Lúc này cây cây sẽ dài ra tiếp. Do nhánh `main_B` vẫn được phát triển từ `cm main`.
+
+Tuy nhiên, khi ta chuyển lại sang nhánh main, ta sẽ không thấy được những thay đổi vừa thực hiện trên nhánh `main_B`. Cùng check lại xem sao nhé!
+![git branch](screenshots/git-branch-6.PNG)
+Lúc này ta sẽ thay đổi một số file trên nhánh `main` và push lên repo cloud. Cùng check lại nhánh cây xem sao nhé!
+![git branch](screenshots/git-branch-7.PNG)
+Lúc này cây đã được rẽ nhánh, do nhánh `main` và `main_B` có commit khác nhau và cùng phát triển từ commit `cm main`.
+
+- `git branch -d <branch-name>`: Xóa một nhánh mới ở local.
+```bash
+$ git branch -d <branch-name>
+```
+![git branch -d](screenshots/git-branch-d.PNG)
+- `git branch -D <branch-name>`: Xóa một nhánh mới ở local. (Dùng khi nhánh đó chưa được merge)
+```bash
+$ git branch -D <branch-name>
+```
+![git branch -D](screenshots/git-branch-De.PNG)
+
+- `git push origin --delete <branch-name>`: Xóa một nhánh mới ở remote.
+```bash
+$ git push origin --delete <branch-name>
+```
+![before delete branch](screenshots/before-delete-branch.PNG)
+![after delete branch](screenshots/after-delete-branch.PNG)
+
 - `git checkout <file-name>`: Khôi phục lại file
 ```bash
 $ git checkout <file-name>
@@ -124,10 +179,14 @@ $ git checkout <file-name>
 ```bash
 $ git merge <branch-name>
 ```
-- `git branch -d <branch-name>`: Xóa một nhánh
-```bash
-$ git branch -d <branch-name>
-```
+![git merge](screenshots/git-merge.PNG)
+Chúng ta sẽ thấy một số file bị conflict. Để xem file nào bị conflict, ta dùng lệnh `git status`
+![git merge](screenshots/git-merge-2.PNG)
+Để khắc phục conflict, ta chỉnh sửa file đó theo ý mình. Sau đó add và commit như bình thường.
+![git merge](screenshots/git-merge-3.PNG)
+Lúc này nhánh cây sẽ chụm vào nhánh `main`.
+Nếu ta chuyển sang nhánh `main_B` và commit thêm một số file, sau đó push lên repo cloud thì nhánh cây sẽ như này:
+![git merge](screenshots/git-merge-4.PNG)
 
 ### Sharing and Updating Projects
 - `git push`: Đẩy các commit lên repo cloud
