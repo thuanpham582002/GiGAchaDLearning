@@ -175,12 +175,17 @@ $ git push origin --delete <branch-name>
 ```bash
 $ git checkout <file-name>
 ```
+- `git switch <branch-name>`: Chuyển sang nhánh mới. Cơ chế của thằng này giống hệt thằng `git checkout <branch-name>`.
+```bash
+```bash
+$ git switch <branch-name>
+```
 - `git merge <branch-name>`: Merge nhánh mới vào nhánh hiện tại
 ```bash
 $ git merge <branch-name>
 ```
 ![git merge](screenshots/git-merge.PNG)
-Chúng ta sẽ thấy một số file bị conflict. Để xem file nào bị conflict, ta dùng lệnh `git status`
+Chúng ta sẽ thấy một số file bị conflict. Để xem file nào bị conflict, ta dùng lệnh `git status` . Lí do bị conflict là do 2 nhánh có thay đổi cùng một file tại cùng một dòng. Cùng check lại xem sao nhé!
 ![git merge](screenshots/git-merge-2.PNG)
 Để khắc phục conflict, ta chỉnh sửa file đó theo ý mình. Sau đó add và commit như bình thường.
 ![git merge](screenshots/git-merge-3.PNG)
@@ -190,8 +195,22 @@ Nếu ta chuyển sang nhánh `main_B` và commit thêm một số file, sau đ�
 
 ### Sharing and Updating Projects
 - `git push`: Đẩy các commit lên repo cloud
-- `git pull`: Lấy các commit mới nhất từ repo cloud về local và merge vào nhánh hiện tại
 - `git fetch`: Lấy các commit mới nhất từ repo cloud về local nhưng không tự động merge
+- `git pull`: Lấy các commit mới nhất từ repo cloud về local và merge vào nhánh hiện tại
+ Để hiểu rõ về 2 lệnh `git fetch` và `git pull` thì mình cùng xem ví dụ nhé!
+ Mình sẽ tạo thêm 1 bản local khác của repo cloud. mình sẽ gọi bản này là `local2`. Mình sẽ thực hiện một số thay đổi trên `local2` và tạo ra tình huống conflict và push lên repo cloud. Lúc này thì `local1` sẽ không có những thay đổi đó. Do chưa được cập nhật lại từ repo cloud. Cùng check lại xem sao nhé!
+![git fetch](screenshots/git-fetch.PNG)
+Cùng thử lệnh `git fetch` trên `local1` xem sao nhé!
+![git fetch](screenshots/git-fetch-2.PNG)
+Lúc này thì `local1` đã được cập nhật lại từ repo cloud. Nhưng chưa được merge vào nhánh hiện tại và vẫn giữ nguyên ở commit hiện tại. Cùng check lại xem sao nhé!
+![git fetch](screenshots/git-fetch-3.PNG)
+Tuy nhiên khi ta muốn tạo thêm một commit mới thì sẽ bị reject do commit mới nhất của `local1` chưa được merge vào nhánh hiện tại. Do vậy `git fetch` chỉ có tác dụng cập nhật thông tin, trạng thái repo. Để `local1` có thể tạo thêm commit mới thì ta phải merge nhánh mới vào nhánh hiện tại. Do vậy ta sẽ dùng lệnh `git pull` để cập nhật repo và merge nhánh mới vào nhánh hiện tại.
+![git fetch](screenshots/git-fetch-4.PNG)
+Sau khi dùng `git pull` thì `local1` đã được cập nhật và merge nhánh mới vào nhánh hiện tại. Ở đây bị conflict thì ta xử lí như tình huống giống trên merge. 
+![git pull](screenshots/git-pull.PNG)
+`git pull` = `git fetch` + `git merge`
+
+
 
 ### Patching
 - `git stash`: Lưu các thay đổi hiện tại vào một khu vực tạm thời
