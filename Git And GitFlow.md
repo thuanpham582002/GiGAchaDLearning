@@ -6,7 +6,9 @@
     + Theo dõi các thay đổi của các tập tin
     + Khôi phục các phiên bản cũ
     + Tạo các nhánh (branch) để phát triển các tính năng mới, làm việc độc lập với nhau.
+    
 ![git common](screenshots/git-common.jpg)
+
 Như hình trên, repository được lưu trên cloud.
 Khi làm việc, thì ta sẽ không thao tác trực tiếp trên cloud, mà sẽ dùng git để clone về. Mục đích là nhiều người có thể đồng thời làm việc với repo này.
 Lúc này ta có bản local của repository. Mô hình giống trên ảnh.
@@ -20,11 +22,15 @@ Lúc này ta có bản local của repository. Mô hình giống trên ảnh.
 
 ## Vấn đề khi đẩy code lên repo cloud
 - Do mỗi repo local là độc lập, khi đẩy code lên 1 repo cloud, có tiềm ẩn khả năng gây ra xung đột (conflict) giữa các phiên bản của các tập tin. (Cùng người cùng sửa 1 dòng code), từ các commit cùng cấp.
+
 ![git conflict](screenshots/git-conflict.jpg)
+
 - Để giải quyết vấn đề này, ta cần phải đồng bộ lại các phiên bản của clone 2 và repo cloud. Sau đó push lên với một phiên bản mới (commit mới).
 - Đồng bộ lại các phiên bản của repo local và repo cloud, ta sẽ dùng lệnh `git pull` để lấy về các phiên bản mới nhất của repo cloud.
 - Sau khi đồng bộ, ta sẽ dùng lệnh `git push` để đẩy code lên repo cloud.
+
 ![git conflict](screenshots/git-conflict-solve.jpg)
+
 ## Tại sao cần có các nhánh?
 - Khi làm việc với repo cloud, ta sẽ không thao tác trực tiếp trên nhánh master, mà sẽ tạo ra các nhánh mới để làm việc. Sau khi hoàn thành, ta sẽ merge vào nhánh master.
 - Dùng nhánh sẽ giúp ta đảm bảo tính toàn vẹn của nhánh master. Vì nhánh master chỉ được merge khi đã được kiểm tra kỹ lưỡng.
@@ -80,6 +86,7 @@ $ git add .
     + Unmodified: là các file đã được add vào staging area, nhưng chưa được commit
 
 ![git unmodified](screenshots/git-unmodified.PNG)
+
     + Modified: là các file đã được commit, nhưng chưa được push lên repo cloud
 
 ![git modified](screenshots/git-modified.PNG)
@@ -98,6 +105,7 @@ C - Conflict (There is a conflict in the file)
 R - Renamed (The file has been renamed)
 S - Submodule (In repository exists another subrepository)
 ```
+
 ![git log](screenshots/git-stage.webp)
 
 - `git commit`: Tạo một commit mới
@@ -105,11 +113,14 @@ S - Submodule (In repository exists another subrepository)
 $ git commit -m "message"
 ~ m ở đây là message, là một thông điệp mô tả cho commit
 ```
+
 ![git commit](screenshots/git-commit.PNG)
+
 - `git log`: Hiển thị các commit đã được thực hiện
 ```bash
 $ git log
 ```
+
 ![git log](screenshots/git-log.PNG)
 
 Ngoài ra 
@@ -120,22 +131,34 @@ Ngoài ra
 
 ### Branching and Merging
 Đây là nhánh cây đầu tiên của repo. Nó chỉ gồm 1 nhánh duy nhất là mặc định là main.
+
 ![git log](screenshots/git-branch-1.PNG)
+
 - `git branch`: Hiển thị các nhánh hiện có
+
 ![git branch](screenshots/git-branch.PNG)
+
 - `git branch <branch-name>`: Tạo một nhánh mới ở local. Nhánh chỉ được tạo trên remote khi push lên repo cloud tại nhánh này.
 ```bash
 $ git branch <branch-name>
 ```
+
 ![git branch](screenshots/git-branch-2.PNG)
+
 Như vậy ta đã tạo thành công một nhánh mới là `main_B`. Cùng check lại các nhánh hiện có bằng lệnh `git branch`
+
 ![git branch](screenshots/git-branch-3.PNG)
+
 Dấu `*` ở trước tên nhánh là nhánh ta đang ở.
 Cùng check lại nhánh cây xem sao nhé!
+
 ![git branch](screenshots/git-branch-1.PNG)
+
 Nhánh cây hiện tại vẫn như ban đầu, vì ta chưa push lên repo cloud.
 Đây là nhánh cây sau khi ta push lên repo cloud tại nhánh `main_B`
+
 ![git branch](screenshots/git-branch-4.PNG)
+
 Dấu đỏ mình khoanh tròn là nhánh `main_B` đã được push lên repo cloud. Do mình push lên với cùng commit của main nên trông 2 nhánh giống như 1 vậy.
 
 - `git checkout <branch-name>`: Chuyển sang nhánh mới
@@ -144,30 +167,40 @@ $ git checkout <branch-name>
 ```
 
 Tiếp đó mình sẽ thử thay đổi một số file để tạo ra commit mới. Sau đó push lên repo cloud tại nhánh `main_B`. Cùng check lại nhánh cây xem sao nhé!
+
 ![git branch](screenshots/git-branch-5.PNG)
+
 Lúc này cây cây sẽ dài ra tiếp. Do nhánh `main_B` vẫn được phát triển từ `cm main`.
 
 Tuy nhiên, khi ta chuyển lại sang nhánh main, ta sẽ không thấy được những thay đổi vừa thực hiện trên nhánh `main_B`. Cùng check lại xem sao nhé!
+
 ![git branch](screenshots/git-branch-6.PNG)
+
 Lúc này ta sẽ thay đổi một số file trên nhánh `main` và push lên repo cloud. Cùng check lại nhánh cây xem sao nhé!
+
 ![git branch](screenshots/git-branch-7.PNG)
+
 Lúc này cây đã được rẽ nhánh, do nhánh `main` và `main_B` có commit khác nhau và cùng phát triển từ commit `cm main`.
 
 - `git branch -d <branch-name>`: Xóa một nhánh mới ở local.
 ```bash
 $ git branch -d <branch-name>
 ```
+
 ![git branch -d](screenshots/git-branch-d.PNG)
+
 - `git branch -D <branch-name>`: Xóa một nhánh mới ở local. (Dùng khi nhánh đó chưa được merge)
 ```bash
 $ git branch -D <branch-name>
 ```
+
 ![git branch -D](screenshots/git-branch-De.PNG)
 
 - `git push origin --delete <branch-name>`: Xóa một nhánh mới ở remote.
 ```bash
 $ git push origin --delete <branch-name>
 ```
+
 ![before delete branch](screenshots/before-delete-branch.PNG)
 ![after delete branch](screenshots/after-delete-branch.PNG)
 
@@ -184,13 +217,20 @@ $ git switch <branch-name>
 ```bash
 $ git merge <branch-name>
 ```
+
 ![git merge](screenshots/git-merge.PNG)
+
 Chúng ta sẽ thấy một số file bị conflict. Để xem file nào bị conflict, ta dùng lệnh `git status` . Lí do bị conflict là do 2 nhánh có thay đổi cùng một file tại cùng một dòng. Cùng check lại xem sao nhé!
+
 ![git merge](screenshots/git-merge-2.PNG)
+
 Để khắc phục conflict, ta chỉnh sửa file đó theo ý mình. Sau đó add và commit như bình thường.
+
 ![git merge](screenshots/git-merge-3.PNG)
+
 Lúc này nhánh cây sẽ chụm vào nhánh `main`.
 Nếu ta chuyển sang nhánh `main_B` và commit thêm một số file, sau đó push lên repo cloud thì nhánh cây sẽ như này:
+
 ![git merge](screenshots/git-merge-4.PNG)
 
 ### Sharing and Updating Projects
@@ -199,27 +239,42 @@ Nếu ta chuyển sang nhánh `main_B` và commit thêm một số file, sau đ�
 - `git pull`: Lấy các commit mới nhất từ repo cloud về local và merge vào nhánh hiện tại
  Để hiểu rõ về 2 lệnh `git fetch` và `git pull` thì mình cùng xem ví dụ nhé!
  Mình sẽ tạo thêm 1 bản local khác của repo cloud. mình sẽ gọi bản này là `local2`. Mình sẽ thực hiện một số thay đổi trên `local2` và tạo ra tình huống conflict và push lên repo cloud. Lúc này thì `local1` sẽ không có những thay đổi đó. Do chưa được cập nhật lại từ repo cloud. Cùng check lại xem sao nhé!
+
 ![git fetch](screenshots/git-fetch.PNG)
+
 Cùng thử lệnh `git fetch` trên `local1` xem sao nhé!
+
 ![git fetch](screenshots/git-fetch-2.PNG)
+
 Lúc này thì `local1` đã được cập nhật lại từ repo cloud. Nhưng chưa được merge vào nhánh hiện tại và vẫn giữ nguyên ở commit hiện tại. Cùng check lại xem sao nhé!
+
 ![git fetch](screenshots/git-fetch-3.PNG)
+
 Tuy nhiên khi ta muốn tạo thêm một commit mới thì sẽ đè lên commit mới nhất với dữ liệu cũ, lỗi này không được phép có trong project thực tế. Do vậy `git fetch` chỉ có tác dụng cập nhật thông tin, trạng thái repo.
+
 ![git fetch](screenshots/git-fetch-4.PNG)
+
 Sau khi dùng `git pull` thì `local1` đã được cập nhật và merge nhánh mới vào nhánh hiện tại. Ở đây bị conflict thì ta xử lí như tình huống giống trên merge. 
+
 ![git pull](screenshots/git-pull.PNG)
+
 `git pull` = `git fetch` + `git merge`
 
 ### Patching
 - `git stash`: Lưu các thay đổi hiện tại vào một khu vực tạm thời
 - Trước khi gọi lệnh `git stash` thì các thay đổi sẽ được hiển thị như sau:
+
 ![git stash](screenshots/git-stash.PNG)
+
 - Sau khi gọi lệnh `git stash` thì các thay đổi sẽ được hiển thị như sau:
+
 ![git stash](screenshots/git-stash-2.PNG)
+
 ```bash
 Lưu các thay đổi chưa được commit vào một khu vực tạm thời và xóa các thay đổi đó khỏi staging area
 ```
 - `git stash pop`: Lấy các thay đổi đã lưu trước đó
+
 ![git stash](screenshots/git-stash-3.PNG)
 
 ```bash
